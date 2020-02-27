@@ -1,6 +1,6 @@
 {
   "name": "@aaf/testing-github-actions",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "repository": "git@github.com:frehner/testing-github-actions.git",
   "author": "Anthony Frehner <afrehner.work@gmail.com>",
