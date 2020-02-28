@@ -13,16 +13,20 @@ jobs:
         node-version: '12.x'
         registry-url: 'https://registry.npmjs.org'
         scope: '@aaf' # Defaults to the user or organization that owns the workflow file
-    - name: Get yarn cache directory path
-      id: yarn-cache-dir-path
-      run: echo "::set-output name=dir::$(yarn cache dir)"
-    - uses: actions/cache@v1
-      id: yarn-cache
-      with:
-        path: ${{ steps.yarn-cache-dir-path.output.dir }}
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-yarn-
+
+    # attempt at using a cache for yarn. however, the cache action is currently limited on which jobs it can run on.
+    # https://help.github.com/en/actions/configuring-and-managing-workflows/caching-dependencies-to-speed-up-workflows#restrictions-for-accessing-a-cache
+    # - name: Get yarn cache directory path
+    #   id: yarn-cache-dir-path
+    #   run: echo "::set-output name=dir::$(yarn cache dir)"
+    # - uses: actions/cache@v1
+    #   id: yarn-cache
+    #   with:
+    #     path: ${{ steps.yarn-cache-dir-path.output.dir }}
+    #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-yarn-
+
     - run: yarn
     - run: yarn publish --access public
       env:
